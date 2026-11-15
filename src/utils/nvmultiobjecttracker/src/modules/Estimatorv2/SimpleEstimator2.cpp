@@ -241,7 +241,11 @@ void SimpleEstimator2::initStates(const Eigen::VectorXd &meas)
 			m_P(3,3) *= 4.0;
 			m_P(4,4) *= 100.0;
 			m_P(5,5) *= 100.0;
-			m_P(7,7) *= 100.0;
+			/// Height velocity h' exists only in the 8-state model; the 6-state trajectory projector has no index 7.
+			if (m_numTotalStates > 7)
+			{
+				m_P(7,7) *= 100.0;
+			}
 		}
 		else
 		{
