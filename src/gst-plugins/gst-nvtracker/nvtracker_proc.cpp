@@ -2509,7 +2509,7 @@ void NvTrackerProc::processBatch()
       queueFrames(*(procParams.input.pBatchMeta), batchList);
 
       NvTrackerMiscDataBuffer *pMiscDataBuf = m_MiscDataMgr.pop();
-      NvMOTTrackerMiscData miscDataResult;
+      NvMOTTrackerMiscData miscDataResult = {};
       if (pMiscDataBuf)
       {
         miscDataResult.pPastFrameObjBatch = &pMiscDataBuf->pastFrameObjBatch;
@@ -2529,6 +2529,7 @@ void NvTrackerProc::processBatch()
         miscDataResult.pPastFrameObjBatch = nullptr;
         procResult.pReidTensorBatch = nullptr;
         miscDataResult.pTerminatedTrackBatch = nullptr;
+        miscDataResult.pShadowTrackBatch = nullptr;
 
         /** Print warning if user meta is required but unavailable. */
         if (m_Config.pastFrame || m_Config.outputReidTensor)
@@ -2899,7 +2900,7 @@ void NvTrackerProc::processSubBatch(DispatchInfo *pDispatchInfo)
     if (!m_TrackerLibError.load())
     {
       NvTrackerMiscDataBuffer *pMiscDataBuf = miscDataMgr.pop();
-      NvMOTTrackerMiscData miscDataResult;
+      NvMOTTrackerMiscData miscDataResult = {};
       if (pMiscDataBuf)
       {
         miscDataResult.pPastFrameObjBatch = &pMiscDataBuf->pastFrameObjBatch;
@@ -2912,6 +2913,7 @@ void NvTrackerProc::processSubBatch(DispatchInfo *pDispatchInfo)
         miscDataResult.pPastFrameObjBatch = nullptr;
         procResult.pReidTensorBatch = nullptr;
         miscDataResult.pTerminatedTrackBatch = nullptr;
+        miscDataResult.pShadowTrackBatch = nullptr;
 
         /** Print warning if user meta is required but unavailable. */
         if (m_Config.pastFrame || m_Config.outputReidTensor)

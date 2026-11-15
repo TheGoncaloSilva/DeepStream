@@ -108,6 +108,7 @@ void TrackerMiscDataManager::allocatePastFrame(NvTrackerMiscDataBuffer *pNewBuf,
       NvDsTargetMiscDataObject& objList = objStream.list[targetInd];
       objList.list = new NvDsTargetMiscDataFrame [maxShadowTrackingAge];
       objList.numObj = 0;
+      objList.numAllocated = maxShadowTrackingAge;
     }
   }
 }
@@ -296,6 +297,7 @@ void TrackerMiscDataManager::allocateShadowTracks(NvTrackerMiscDataBuffer *pNewB
       NvDsTargetMiscDataObject& objList = objStream.list[targetInd];
       objList.list = new NvDsTargetMiscDataFrame [1];
       objList.numObj = 0;
+      objList.numAllocated = 1;
     }
   }
 
